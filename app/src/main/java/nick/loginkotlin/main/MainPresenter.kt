@@ -1,13 +1,25 @@
 package nick.loginkotlin.main
 
-class MainPresenter(private val view: MainMvpView): MainMvpPresenter {
+import nick.loginkotlin.PackageModel
+import nick.loginkotlin.SharedPrefsHelper
+
+class MainPresenter(private val view: MainMvpView,
+                    private val packageModel: PackageModel) : MainMvpPresenter {
+
+    private val model = SharedPrefsHelper(packageModel)
+
+    override fun onCreate() {
+
+        if (!model.isLoggedIn()) {
+            view.openLoginView()
+            return
+        }
+        view.showMessage("Logged in")
+    }
 
     override fun onLogout() {
         view.openLoginView()
-    }
-
-    override fun onCreate() {
-        view.showMessage("Logged in")
+        model.setIsLoggedIn(false)
     }
 
 }
