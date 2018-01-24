@@ -6,16 +6,18 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import nick.loginkotlin.PackageModel
 import nick.loginkotlin.R
 import nick.loginkotlin.login.LoginActivity
 
 class MainActivity : AppCompatActivity(), MainMvpView {
 
-    private val presenter: MainMvpPresenter = MainPresenter(this)
-
+    private lateinit var presenter: MainMvpPresenter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        presenter = MainPresenter(this, PackageModel(this))
 
         presenter.onCreate()
         findViewById<Button>(R.id.logout).setOnClickListener{ presenter.onLogout() }
