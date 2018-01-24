@@ -1,5 +1,9 @@
 package nick.loginkotlin
 
-class MainPresenter: MainMvpPresenter {
+class MainPresenter(val view: MainMvpView): MainMvpPresenter {
+
+    override fun onLogout() {
+        view.showMessage("Logging out")
+    }
 
 }
