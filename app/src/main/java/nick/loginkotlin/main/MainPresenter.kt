@@ -14,7 +14,9 @@ class MainPresenter(private val view: MainMvpView,
             view.openLoginView()
             return
         }
-        view.showMessage("Logged in")
+        val username = model.getUsername()
+        view.showMessage("Logged in as $username")
+        view.setUsername(username)
     }
 
     override fun onLogout() {

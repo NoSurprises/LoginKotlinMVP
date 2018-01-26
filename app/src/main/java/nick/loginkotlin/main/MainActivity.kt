@@ -5,6 +5,7 @@ import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import nick.loginkotlin.PackageModel
 import nick.loginkotlin.R
@@ -25,6 +26,10 @@ class MainActivity : AppCompatActivity(), MainMvpView {
 
     override fun showMessage(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setUsername(username: String) {
+        findViewById<TextView>(R.id.name).setText(username)
     }
 
     override fun openLoginView() {

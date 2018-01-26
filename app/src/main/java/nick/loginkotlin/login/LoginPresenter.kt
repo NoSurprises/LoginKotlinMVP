@@ -33,6 +33,7 @@ class LoginPresenter(private val view: LoginMvpView,
 
     private fun login() {
         model.setIsLoggedIn(true)
+        model.setUsername(view.getUsername())
         view.openMainActivity()
     }
 
