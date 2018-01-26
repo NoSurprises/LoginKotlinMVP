@@ -8,8 +8,39 @@ class LoginPresenter(private val view: LoginMvpView,
 
     private val model = SharedPrefsHelper(packageModel)
     
-    override fun login() {
+    override fun loginSubmit() {
+        view.hideErrors()
+        val username = view.getUsername()
+        val password = view.getPassword()
+
+        val usernameValid = isUsernameValid(username)
+        val passwordValid = isPasswordValid(password)
+
+        if (usernameValid && passwordValid) {
+            login()
+        }
+        else {
+            if (!usernameValid) {
+                view.showUsernameError()
+            }
+            if (!passwordValid) {
+                view.showPasswordError()
+            }
+        }
+
+
+    }
+
+    private fun login() {
         model.setIsLoggedIn(true)
         view.openMainActivity()
+    }
+
+    private fun isPasswordValid(pass: String): Boolean {
+        return pass.length >= 6
+    }
+
+    private fun isUsernameValid(username: String): Boolean {
+        return username.isNotEmpty()
     }
 }
