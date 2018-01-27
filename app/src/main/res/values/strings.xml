@@ -7,4 +7,6 @@
     <string name="sign_up">Sign up</string>
     <string name="username_error">Invalid username.</string>
     <string name="password_error">Password incorrect.</string>
+    <string name="match_error">Password is incorrect</string>
+    <string name="create_new_user">Create new user</string>
 </resources>
