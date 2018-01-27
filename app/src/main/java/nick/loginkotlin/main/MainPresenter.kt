@@ -22,6 +22,7 @@ class MainPresenter(private val view: MainMvpView,
     override fun onLogout() {
         view.openLoginView()
         model.setIsLoggedIn(false)
+
     }
 
 }

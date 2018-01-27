@@ -1,7 +1,6 @@
 package nick.loginkotlin.login
 
 import android.content.Intent
-import android.opengl.Visibility
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -23,6 +22,7 @@ class LoginActivity : AppCompatActivity(), LoginMvpView {
         presenter = LoginPresenter(this, PackageModel(this))
 
         findViewById<Button>(R.id.submit).setOnClickListener({ presenter.loginSubmit() })
+        findViewById<TextView>(R.id.sign_up).setOnClickListener({ presenter.openSignUp()})
     }
 
     override fun openMainActivity() {
@@ -38,6 +38,14 @@ class LoginActivity : AppCompatActivity(), LoginMvpView {
         return (findViewById<EditText>(R.id.password) as EditText).text.toString()
     }
 
+    override fun setUsername(username: String) {
+        findViewById<EditText>(R.id.username).setText(username)
+    }
+
+    override fun setPassword(password: String) {
+        findViewById<EditText>(R.id.password).setText(password)
+    }
+
     override fun showUsernameError() {
         findViewById<TextView>(R.id.username_error).visibility = View.VISIBLE
     }
@@ -49,5 +57,21 @@ class LoginActivity : AppCompatActivity(), LoginMvpView {
     override fun hideErrors() {
         findViewById<TextView>(R.id.username_error).visibility = View.GONE
         findViewById<TextView>(R.id.password_error).visibility = View.GONE
+    }
+
+    override fun openSignUp() {
+        setContentView(R.layout.signup)
+    }
+
+    override fun initBack() {
+
+    }
+
+    override fun getPasswordConfirm(): String {
+        return (findViewById<EditText>(R.id.password_confirm) as EditText).text.toString()
+    }
+
+    override fun initSignupListener() {
+        findViewById<Button>(R.id.sign_up).setOnClickListener({ presenter.signup() })
     }
 }
