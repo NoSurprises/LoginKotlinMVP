@@ -28,4 +28,16 @@ class SharedPrefsHelper(packageModel: PackageModel): SharedPreferencesMvpHelper 
     override fun getUsername(): String {
         return sharedPreferences.getString(USERNAME, "default username")
     }
+
+    override fun userExists(username: String): Boolean {
+        return true
+    }
+
+    override fun passwordMatch(username: String, password: String): Boolean {
+        return true
+    }
+
+    override fun signup(username: String, password: String) {
+
+    }
 }

@@ -3,5 +3,6 @@ package nick.loginkotlin.login
 interface LoginMvpPresenter {
     fun loginSubmit()
     fun openSignUp()
-    fun signup()
+    fun signupSubmit()
+    fun signup(username: String, password: String)
 }

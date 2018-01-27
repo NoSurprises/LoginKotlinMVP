@@ -9,5 +9,10 @@ interface SharedPreferencesMvpHelper {
     fun getUsername(): String
     fun setUsername(username: String)
 
+    fun userExists(username: String): Boolean
+    fun passwordMatch(username: String, password: String): Boolean
+
+    fun signup(username: String, password: String)
+
 
 }

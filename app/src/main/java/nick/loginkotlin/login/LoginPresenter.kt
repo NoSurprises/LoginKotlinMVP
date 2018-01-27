@@ -17,7 +17,8 @@ class LoginPresenter(private val view: LoginMvpView,
         val passwordValid = isPasswordValid(password)
 
         if (usernameValid && passwordValid) {
-            login()
+            if (model.userExists(username) && model.passwordMatch(username, password))
+                login()
         }
         else {
             if (!usernameValid) {
@@ -50,8 +51,8 @@ class LoginPresenter(private val view: LoginMvpView,
     }
 
     override fun openSignUp() {
-        var username = view.getUsername()
-        var password = view.getPassword()
+        val username = view.getUsername()
+        val password = view.getPassword()
 
         view.openSignUp()
 
@@ -63,7 +64,7 @@ class LoginPresenter(private val view: LoginMvpView,
 
     }
 
-    override fun signup() {
+    override fun signupSubmit() {
         view.hideErrors()
 
         val usernameValid = isUsernameValid(view.getUsername())
@@ -73,7 +74,7 @@ class LoginPresenter(private val view: LoginMvpView,
         val passwordsMatch = isPasswordsMatch(password1, password2)
 
         if (usernameValid && passwordValid && passwordsMatch) {
-            login()
+            signup(view.getUsername(), view.getPassword())
         }
         else {
             if(!usernameValid) {
@@ -83,7 +84,10 @@ class LoginPresenter(private val view: LoginMvpView,
                 view.showPasswordError()
             }
         }
+    }
 
-
+    override fun signup(username: String, password: String) {
+        model.signup(username, password)
+        login()
     }
 }

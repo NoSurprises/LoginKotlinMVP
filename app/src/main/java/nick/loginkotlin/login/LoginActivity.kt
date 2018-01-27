@@ -72,6 +72,6 @@ class LoginActivity : AppCompatActivity(), LoginMvpView {
     }
 
     override fun initSignupListener() {
-        findViewById<Button>(R.id.sign_up).setOnClickListener({ presenter.signup() })
+        findViewById<Button>(R.id.sign_up).setOnClickListener({ presenter.signupSubmit() })
     }
 }
